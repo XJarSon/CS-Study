@@ -1,6 +1,8 @@
 # K	NIO's Sword
-原题链接：https://ac.nowcoder.com/acm/contest/33189/K
+## 原题链接：
+https://ac.nowcoder.com/acm/contest/33189/K
 暴力题没想到暴力
+
 ## 题目大意
 构造一串数A,A初始值为0,A每次可以进行10 * A+x的操作使得 A ≡ i (mod n).求i从1~n变化的最小的操作数
 

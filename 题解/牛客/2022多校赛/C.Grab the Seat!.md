@@ -1,5 +1,6 @@
 # C.Grab the Seat!
-题目链接 https://ac.nowcoder.com/acm/contest/33186/C
+## 题目链接：
+https://ac.nowcoder.com/acm/contest/33186/C
 
 ## 题目大意
 
