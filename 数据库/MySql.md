@@ -76,7 +76,12 @@ CREATE TABLE 表名(
 ```
 *ps:最后一个字段后面没有逗号。*
 
-7.删除指定表并重新创建该表
+7.查询表的数据
+```mysql
+SELECT 字段1,字段2 ··· FROM 表名;
+```
+
+8.删除指定表并重新创建该表
 
 ```mysql
 TRUECATE TABLE 表名;
@@ -107,6 +112,7 @@ INSERT INTO 表名(字段名1,字段名2,···) VALUE(值1,值2···);
 ```
 
 2.给全部字段添加数据
+
 ```mysql
 INSERT INTO VALUE(值1,值2···);
 ```
@@ -252,7 +258,7 @@ DESC ：降序
 SELECT 字段列表 FROM 表名 LIMIT 起始索引, 查询记录数;
 ```
 
-ps:
+*ps:*
 - 起始索引从0开始，起始索引 = （查询页码 - 1） * 每页显示记录数。此处类比数组。
 - 分页查询是数据库的方言，不同数据库有不同实现，MySQL是LIMIT
 - 如果查询的是第一页数据，起始索引可以省略，直接简写 LIMIT 10
@@ -280,3 +286,80 @@ DROP USER '用户名'@'主机名';
 *ps：*
 * 主机名可以用%进行通配。
 * 这类SQL开发人员操作比较少，主要是DBA（数据库管理员）使用。
+
+### 权限控制
+1.查询权限
+```mysql
+SHOW GRANTS FOR '用户名'@'主机名';
+```
+2.授予权限
+```mysql
+GRANT 权限列表 ON 数据库名.表名 TO '用户名'@'主机名';
+```
+3.撤销权限
+
+```mysql
+REVOKE 权限列表 ON 数据库名.表名 FROM '用户名'@'主机名';
+```
+*ps ：*
+
+- 多个权限之间用逗号分隔
+- 授权时，数据库名和表名可以使用 * 进行通配， 代表所有。
+
+## 函数
+*ps : 本处及其简单，看看就好（逃*
+
+- 字符串函数
+- 数值函数
+- 日期函数
+- 流程函数
+
+### 字符串函数
+
+常用函数：
+
+| 函数  | 功能  |
+| ------------ | ------------ |
+| CONCAT(s1, s2, ..., sn)  | 字符串拼接，将s1, s2, ..., sn拼接成一个字符串  |
+| LOWER(str)  | 将字符串全部转为小写  |
+| UPPER(str)  | 将字符串全部转为大写  |
+| LPAD(str, n, pad)  | 左填充，用字符串pad对str的左边进行填充，达到n个字符串长度  |
+| RPAD(str, n, pad)  | 右填充，用字符串pad对str的右边进行填充，达到n个字符串长度  |
+| TRIM(str)  | 去掉字符串头部和尾部的空格  |
+| SUBSTRING(str, start, len)  | 返回从字符串str从start位置起的len个长度的字符串  |
+### 数值函数
+
+常见函数：
+
+| 函数  | 功能  |
+| ------------ | ------------ |
+| CEIL(x)  | 向上取整  |
+| FLOOR(x)  | 向下取整  |
+| MOD(x, y)  | 返回x/y的模  |
+| RAND() | 返回0~1内的随机数 |
+| ROUND(x, y) | 求参数x的四舍五入值，保留y位小数 |
+
+### 日期函数
+
+常用函数：
+
+| 函数  | 功能  |
+| ------------ | ------------ |
+| CURDATE()  | 返回当前日期  |
+| CURTIME()  | 返回当前时间  |
+| NOW()  | 返回当前日期和时间  |
+| YEAR(date)  | 获取指定date的年份  |
+| MONTH(date)  | 获取指定date的月份  |
+| DAY(date)  | 获取指定date的日期  |
+| DATE_ADD(date, INTERVAL expr type)  | 返回一个日期/时间值加上一个时间间隔expr后的时间值  |
+| DATEDIFF(date1, date2)  | 返回起始时间date1和结束时间date2之间的天数  |
+### 流程函数
+
+常用函数：
+
+| 函数  | 功能  |
+| ------------ | ------------ |
+| IF(value, t, f)  | 如果value为true，则返回t，否则返回f  |
+| IFNULL(value1, value2)  | 如果value1不为空，返回value1，否则返回value2  |
+| CASE WHEN [ val1 ] THEN [ res1 ] ... ELSE [ default ] END  | 如果val1为true，返回res1，... 否则返回default默认值  |
+| CASE [ expr ] WHEN [ val1 ] THEN [ res1 ] ... ELSE [ default ] END  | 如果expr的值等于val1，返回res1，... 否则返回default默认值  |
